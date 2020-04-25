@@ -18,40 +18,70 @@ class MyApp extends StatefulWidget{
 class _MyAppState extends State<MyApp>{
   
   var _questionIndex = 0;
+  var totalScore = 0;
  
+  void answerQuestion(score){
 
-  void answerQuestion(){
 
-    
-      setState(() {
-      _questionIndex = _questionIndex + 1;
+    totalScore += score; 
+    print(totalScore);
+
+    setState(() {
+    _questionIndex = _questionIndex + 1;
     });
+
     print(_questionIndex);
     if ( _questionIndex < questions.length){
       print("We have more questions");
     }
     
-   
   }
 
   void reset(){
+    
     setState(() {
       _questionIndex = 0;
+      totalScore = 0;
     });
   }
 
   var questions = [
       {"questionText": "What's your favourite colour?",
-      "answerText":["Black","White","Blue","Yellow"]
+      "answerText":[
+        {"text":"Black","score":10},
+        {"text":"Blue","score":0},
+        {"text":"Yellow","score":0},
+        {"text":"Magenta","score":0}
+        ]
+        
       },
       {"questionText": "What's your favourite Animal?",
-       "answerText":["Lion","Tiger","Dog","cat"]
+       "answerText":[
+         {"text":"Lion","score":0},
+         {"text":"Tiger","score":0},
+         {"text":"Dog","score":0},
+         {"text":"cat","score":10}
+         ]
+        
+        
       },
       {"questionText": "What's your favourite food?",
-       "answerText":["Idli","Pav Bhaji","Medu Vada","chinese"]
+       "answerText":[
+        {"text": "Idli","score":0},
+        {"text":"Pav Bhaji","score":0},
+        {"text":"Medu Vada","score":0},
+        {"text":"chinese","score":10},
+        ]
+        
+       
        },
       {"questionText": "What's your favourite show?",
-      "answerText":["Breaking Bad","Money Heist","Naruto","Death Note"]
+      "answerText":[
+        {"text":"Breaking Bad","score":0},
+        {"text":"Money Heist","score":0},
+        {"text": "Naruto","score":10},
+        {"text":"Death Note","score":0}]
+        
       }
     ]; 
 
@@ -73,7 +103,7 @@ class _MyAppState extends State<MyApp>{
           answerQuestion:answerQuestion
           ) 
           :
-        Result(reset)
+        Result(reset,totalScore)
          
       )
       );
