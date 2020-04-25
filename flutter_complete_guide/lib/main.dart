@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'answer.dart';
-import './question.dart';
+import './result.dart';
+import './quiz.dart';
+
 
 
 void main()=> runApp(MyApp());
@@ -65,25 +66,15 @@ class _MyAppState extends State<MyApp>{
             "hello"
             ),
         ) ,
-        body: _questionIndex < questions.length ? Column(
-          children:[
-               Questions(
-                 questions[_questionIndex]["questionText"]
-                 ),
-                ...(questions[_questionIndex]["answerText"] as List<String>).map((answers){
-                  return Answer(answerQuestion, answers);
-                }).toList()
-          ],
-          ):
-          Column(
-            children: [
-              Text("You did it"),
-              RaisedButton(
-                child: Text("RESET"),
-                onPressed: reset
-                )
-          ],
-          )
+        body: _questionIndex < questions.length ?
+        Quiz(
+          questions:questions,
+          questionIndex:_questionIndex,
+          answerQuestion:answerQuestion
+          ) 
+          :
+        Result(reset)
+         
       )
       );
   }
